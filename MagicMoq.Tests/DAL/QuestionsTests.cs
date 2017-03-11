@@ -238,6 +238,8 @@ namespace MagicMoq.Tests.DAL
         public void EnsureCountToFiveReturnsListOfFiveInts()
         {
             Mock<Answers> mock_answers = new Mock<Answers>();
+            //It class 
+            //It.Is<int>(i => i == 5)
             mock_answers.Setup(a => a.ListOfNInts(It.IsAny<int>())).Returns(new List<int> { 1,2,3,4,5 });
 
             Questions questions = new Questions(mock_answers.Object);
@@ -254,13 +256,14 @@ namespace MagicMoq.Tests.DAL
         public void EnsureFirstThreeEvenIntsReturnsListOfThreeEvenInts()
         {
             Mock<Answers> mock_answers = new Mock<Answers>();
-            mock_answers.Setup(a => a.ListOfNInts(It.IsAny<int>())).Returns(new List<int> { 2, 4, 6 });
+            //mock_answers.Setup(a => a.ListOfNInts(It.IsAny<int>())).Returns(new List<int> { 2, 4, 6 });
+            mock_answers.Setup(a => a.ListOfNInts(It.Is<int>(i => i == 6))).Returns(new List<int> { 1, 2, 3, 4, 5, 6 });
 
             Questions questions = new Questions(mock_answers.Object);
 
             // Act
             List<int> expected_result = new List<int> { 2, 4, 6 };
-            List<int> actual_result = questions.CountToFive();
+            List<int> actual_result = questions.FirstThreeEvenInts();
 
             // Assert
             CollectionAssert.AreEqual(expected_result, actual_result);
@@ -270,13 +273,14 @@ namespace MagicMoq.Tests.DAL
         public void EnsureFirstThreeOddIntsReturnsListOfThreeOddInts()
         {
             Mock<Answers> mock_answers = new Mock<Answers>();
-            mock_answers.Setup(a => a.ListOfNInts(It.IsAny<int>())).Returns(new List<int> { 1, 3, 5 });
+            //mock_answers.Setup(a => a.ListOfNInts(It.IsAny<int>())).Returns(new List<int> { 1, 3, 5 });
 
+            mock_answers.Setup(a => a.ListOfNInts(It.Is<int>(i => i == 6))).Returns(new List<int> { 1, 2, 3, 4, 5, 6 });
             Questions questions = new Questions(mock_answers.Object);
 
             // Act
             List<int> expected_result = new List<int> { 1, 3, 5 };
-            List<int> actual_result = questions.CountToFive();
+            List<int> actual_result = questions.FirstThreeOddInts();
 
             // Assert
             CollectionAssert.AreEqual(expected_result, actual_result);
