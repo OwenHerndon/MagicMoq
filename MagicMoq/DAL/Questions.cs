@@ -39,6 +39,11 @@ namespace MagicMoq.DAL
                 {
                     result.Add(number);
                 }
+
+                if (result.Count == 3)
+                {
+                    break;
+                }
             }
             return result;
         }
@@ -46,7 +51,7 @@ namespace MagicMoq.DAL
         public List<int> FirstThreeOddInts()
         {
             //return Wand.ListOfNInts(3);
-            List<int> numbers = Wand.ListOfNInts(5); //presorted
+            List<int> numbers = Wand.ListOfNInts(10); //presorted
             //use numbers.Sort() if ListofInts isnt sorted.
             List<int> result = new List<int>();
             foreach (var number in numbers)
@@ -55,8 +60,13 @@ namespace MagicMoq.DAL
                 {
                     result.Add(number);
                 }
+
+                if(result.Count == 3)
+                {
+                    break;
+                }
             }
-            return result;
+            return result; //needs to be here incase less than 3 numbers are passed in
         }
 
         public int FourMinusTwo()
